@@ -2,12 +2,14 @@ package quanlynhansu.views;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import quanlynhansu.controllers.TaiKhoanController;
 import quanlynhansu.models.NhanVien;
 import quanlynhansu.providers.AuthorizedUser;
 import quanlynhansu.providers.ControllerException;
+import quanlynhansu.providers.Util;
 
 @SuppressWarnings("serial")
 public class FormDangNhap extends JFrame {
@@ -65,6 +67,7 @@ public class FormDangNhap extends JFrame {
 		this.add(bottomPanel, BorderLayout.SOUTH);
 
 		this.setSize(350, 150);
+		Util.centerScreen(this);
 	}
 
 	public void assignListeners() {

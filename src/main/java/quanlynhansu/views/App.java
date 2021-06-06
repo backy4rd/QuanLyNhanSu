@@ -4,6 +4,7 @@ import java.awt.*;
 import javax.swing.*;
 
 import quanlynhansu.providers.AuthorizedUser;
+import quanlynhansu.providers.Util;
 
 @SuppressWarnings("serial")
 public class App extends JFrame {
@@ -32,7 +33,7 @@ public class App extends JFrame {
 		toggleFeatures();
 
 		assignListeners();
-
+		
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setVisible(true);
 	}
@@ -58,6 +59,7 @@ public class App extends JFrame {
 
 		this.add(menubar, BorderLayout.NORTH);
 		this.setSize(800, 500);
+		Util.centerScreen(this);
 	}
 
 	public void assignListeners() {

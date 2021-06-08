@@ -2,6 +2,7 @@ package quanlynhansu.models;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import quanlynhansu.providers.DBConnection;
 
@@ -39,8 +40,13 @@ public class CoSoLamViec {
 	public void setDiaChi(String diaChi) {
 		this.diaChi = diaChi;
 	}
+	
+	@Override
+	public String toString() {
+		return this.tenCS;
+	}
 
-	public static CoSoLamViec getCoSoLamViec(String maCS) {
+	public static CoSoLamViec getCoSoLamViec(String maCS) throws SQLException {
 		Object[] params = { maCS };
 		String query = "SELECT * FROM ChucVu WHERE MaCV=?";
 
@@ -48,10 +54,21 @@ public class CoSoLamViec {
 			if (rs.next()) {
 				return new CoSoLamViec(rs.getString("MaCS"), rs.getString("TenCS"), rs.getString("DiaChi"));
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+			return null;
 		}
 
-		return null;
+	}
+
+	public static ArrayList<CoSoLamViec> getCoSoLamViecs() throws SQLException {
+		ArrayList<CoSoLamViec> list = new ArrayList<>();
+		String query = "SELECT * FROM CoSoLamViec";
+
+		try (ResultSet rs = DBConnection.getInstance().executeQuery(query)) {
+			while (rs.next()) {
+				list.add(new CoSoLamViec(rs.getString("MaCS"), rs.getString("TenCS"), rs.getString("DiaChi")));
+			}
+		}
+
+		return list;
 	}
 }

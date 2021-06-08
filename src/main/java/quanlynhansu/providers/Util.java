@@ -1,18 +1,26 @@
 package quanlynhansu.providers;
 
+import java.awt.Component;
+
+import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Random;
 
 import javax.swing.JFrame;
 
+/**
+ * Chứa các phương thức cần thiết
+ */
 public class Util {
 	/**
-	 * Tạo ID ngẫu nhiên và không trùng lăp
-	 * @param	prefix	Tiền tố của ID, vd: "NV01" có tiền tố là "NV"
-	 * @param	tableName	Tên bảng cần tạo ID
-	 * @param	field	Tên trường của ID
+	 * Tạo ID ngẫu nhiên không trùng lặp
+	 * @param prefix tiền tố của id, vd: "NV01" thì tiền tố là "NV"
+	 * @param tableName tên bảng cần tạo ID
+	 * @param field tên trường cần tạo ID
+	 * @return id
 	 */
 	public static String generateId(String prefix, String tableName, String field) {
 		Random random = new Random();
@@ -35,13 +43,14 @@ public class Util {
 
 		return id;
 	}
-	
+
 	/**
 	 * Căn JFrame ra giữa màn hình
-	 * Chú ý: JFrame cần được setSize trước khi thực hiện căn giữa
+	 * Chú ý: JFrame cần được setSize trước khi gọi hàm này
+	 * @param form
 	 */
 	public static void centerScreen(JFrame form) {
 		Dimension dim = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-		form.setLocation((dim.width - form.getWidth()) / 2, (dim.height - form.getHeight())/ 2);
+		form.setLocation((dim.width - form.getWidth()) / 2, (dim.height - form.getHeight()) / 2);
 	}
 }

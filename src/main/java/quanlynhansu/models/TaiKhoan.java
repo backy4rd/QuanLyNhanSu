@@ -39,27 +39,26 @@ public class TaiKhoan {
 	public void setMaNV(String maNV) {
 		this.maNV = maNV;
 	}
-
-	public static void createTaiKhoan(TaiKhoan tk) {
-		String query = "INSERT INTO TaiKhoan VALUES(?,?,?)";
-		Object[] params = { tk.username, tk.password, tk.maNV };
-		try {
-			DBConnection.getInstance().executeUpdate(query, params);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+	
+	@Override
+	public String toString() {
+		return this.username;
 	}
 
-	public static TaiKhoan getTaiKhoan(String username) {
+	public static void createTaiKhoan(TaiKhoan tk) throws SQLException {
+		String query = "INSERT INTO TaiKhoan VALUES(?,?,?)";
+		Object[] params = { tk.username, tk.password, tk.maNV };
+		DBConnection.getInstance().executeUpdate(query, params);
+	}
+
+	public static TaiKhoan getTaiKhoan(String username) throws SQLException {
 		Object[] params = { username };
 		String query = "SELECT * FROM TaiKhoan WHERE Username=?";
 		try (ResultSet rs = DBConnection.getInstance().executeQuery(query, params)) {
 			if (rs.next()) {
 				return new TaiKhoan(rs.getString("Username"), rs.getString("Password"), rs.getString("MaNV"));
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+			return null;
 		}
-		return null;
 	}
 }

@@ -2,6 +2,10 @@ package quanlynhansu.providers;
 
 import quanlynhansu.models.*;
 
+/**
+ * Chứa thông tin đăng nhập
+ *
+ */
 public class AuthorizedUser {
 	private static AuthorizedUser instance;
 	private NhanVien nhanVien;

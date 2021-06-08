@@ -2,6 +2,7 @@ package quanlynhansu.models;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import quanlynhansu.providers.DBConnection;
 
@@ -40,7 +41,12 @@ public class ChucVu {
 		this.capBac = capBac;
 	}
 
-	public static ChucVu getChucVu(String maCV) {
+	@Override
+	public String toString() {
+		return this.tenCV;
+	}
+
+	public static ChucVu getChucVu(String maCV) throws SQLException {
 		Object[] params = { maCV };
 		String query = "SELECT * FROM ChucVu WHERE MaCV=?";
 
@@ -48,10 +54,20 @@ public class ChucVu {
 			if (rs.next()) {
 				return new ChucVu(rs.getString("MaCV"), rs.getString("TenCV"), rs.getInt("CapBac"));
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public static ArrayList<ChucVu> getChucVus() throws SQLException {
+		ArrayList<ChucVu> list = new ArrayList<>();
+		String query = "SELECT * FROM ChucVu";
+
+		try (ResultSet rs = DBConnection.getInstance().executeQuery(query)) {
+			while (rs.next()) {
+				list.add(new ChucVu(rs.getString("MaCV"), rs.getString("TenCV"), rs.getInt("CapBac")));
+			}
 		}
 
-		return null;
+		return list;
 	}
 }

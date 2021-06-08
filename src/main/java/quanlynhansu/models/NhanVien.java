@@ -5,6 +5,7 @@ import quanlynhansu.providers.DBConnection;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class NhanVien {
 	private String maNV;
@@ -17,6 +18,7 @@ public class NhanVien {
 	private String maCS;
 	private String maCV;
 
+	// relationship
 	private ChucVu chucVu;
 
 	public NhanVien(String maNV, String tenNV, boolean nu, String sdt, Date ngaySinh, String diaChi, double luong,
@@ -112,7 +114,12 @@ public class NhanVien {
 		this.chucVu = chucVu;
 	}
 
-	public static NhanVien getNhanVien(String maNV) {
+	@Override
+	public String toString() {
+		return this.tenNV;
+	}
+
+	public static NhanVien getNhanVien(String maNV) throws SQLException {
 		Object[] params = { maNV };
 		String query = "SELECT * FROM NhanVien WHERE MaNV=?";
 
@@ -122,10 +129,28 @@ public class NhanVien {
 						rs.getString("SDT"), rs.getDate("NgaySinh"), rs.getString("DiaChi"), rs.getDouble("Luong"),
 						rs.getString("MaCS"), rs.getString("MaCV"));
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+			return null;
 		}
 
-		return null;
+	}
+
+	public static ArrayList<NhanVien> getNhanViens() throws SQLException {
+		ArrayList<NhanVien> list = new ArrayList<>();
+		String query = "SELECT * FROM NhanVien";
+
+		try (ResultSet rs = DBConnection.getInstance().executeQuery(query)) {
+			while (rs.next()) {
+				list.add(new NhanVien(rs.getString("MaNV"), rs.getString("TenNV"), rs.getBoolean("Nu"),
+						rs.getString("SDT"), rs.getDate("NgaySinh"), rs.getString("DiaChi"), rs.getDouble("Luong"),
+						rs.getString("MaCS"), rs.getString("MaCV")));
+			}
+		}
+
+		return list;
+	}
+	
+	public static void diemDanh(String maNV, Date ngay) throws SQLException {
+		Object[] params = new Object[] { maNV, ngay };
+		DBConnection.getInstance().executeProcedureUpdate("{ CALL diem_danh(?, ?) }", params);
 	}
 }

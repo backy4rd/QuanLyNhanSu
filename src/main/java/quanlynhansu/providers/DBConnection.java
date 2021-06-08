@@ -4,8 +4,8 @@ import java.sql.*;
 
 public class DBConnection {
 	private static final String URI = "jdbc:mysql://localhost:3306/QuanLyNhanSu";
-	private static final String USERNAME = "tn208";
-	private static final String PASSWORD = "nhom5";
+	private static final String USERNAME = "root";
+	private static final String PASSWORD = "";
 
 	private static DBConnection instance;
 
@@ -27,6 +27,12 @@ public class DBConnection {
 		return instance;
 	}
 
+	/**
+	 * Thực hiện SELECT không tham số
+	 * @param query
+	 * @return ResultSet chứa dữ liệu
+	 * @throws SQLException
+	 */
 	public ResultSet executeQuery(String query) throws SQLException {
 		PreparedStatement ps = conn.prepareStatement(query);
 		ResultSet rs = ps.executeQuery();
@@ -34,6 +40,13 @@ public class DBConnection {
 
 	}
 
+	/**
+	 * Thực hiện SELECT có tham số
+	 * @param query
+	 * @param params
+	 * @return ResultSet chứa dữ liệu
+	 * @throws SQLException
+	 */
 	public ResultSet executeQuery(String query, Object[] params) throws SQLException {
 		PreparedStatement ps = conn.prepareStatement(query);
 		appendParamaters(ps, params);
@@ -42,19 +55,59 @@ public class DBConnection {
 
 	}
 
+	/**
+	 * Thực hiện INSERT, UPDATE, DELETE không tham số
+	 * @param query
+	 * @return Số lượng dòng bị ảnh hưởng bởi câu truy vấn
+	 * @throws SQLException
+	 */
 	public int executeUpdate(String query) throws SQLException {
 		PreparedStatement ps = conn.prepareStatement(query);
 		return ps.executeUpdate();
-
 	}
 
+	/**
+	 * Thực hiện INSERT, UPDATE, DELETE có tham số
+	 * @param query
+	 * @param params
+	 * @return Số lượng dòng bị ảnh hưởng bởi câu truy vấn
+	 * @throws SQLException
+	 */
 	public int executeUpdate(String query, Object[] params) throws SQLException {
 		PreparedStatement ps = conn.prepareStatement(query);
 		appendParamaters(ps, params);
 		return ps.executeUpdate();
 
 	}
+	
+	public ResultSet executeProcedureQuery(String query) throws SQLException {
+		CallableStatement cl = conn.prepareCall(query);
+		return cl.executeQuery();
+	}
 
+	public ResultSet executeProcedureQuery(String query, Object[] params) throws SQLException {
+		CallableStatement cl = conn.prepareCall(query);
+		appendParamaters(cl, params);
+		return cl.executeQuery();
+	}
+
+	public int executeProcedureUpdate(String query) throws SQLException {
+		CallableStatement cl = conn.prepareCall(query);
+		return cl.executeUpdate();
+	}
+	
+	public int executeProcedureUpdate(String query, Object[] params) throws SQLException {
+		CallableStatement cl = conn.prepareCall(query);
+		appendParamaters(cl, params);
+		return cl.executeUpdate();
+	}
+	
+	/**
+	 * Gán những tham số vào câu truy vấn
+	 * @param ps
+	 * @param params
+	 * @throws SQLException
+	 */
 	private void appendParamaters(PreparedStatement ps, Object[] params) throws SQLException {
 		for (int i = 0; i < params.length; i++) {
 			if (params[i] instanceof String) {

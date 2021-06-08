@@ -40,7 +40,7 @@ public class CoSoLamViec {
 	public void setDiaChi(String diaChi) {
 		this.diaChi = diaChi;
 	}
-	
+
 	@Override
 	public String toString() {
 		return this.tenCS;

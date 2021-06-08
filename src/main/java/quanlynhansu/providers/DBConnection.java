@@ -29,6 +29,7 @@ public class DBConnection {
 
 	/**
 	 * Thực hiện SELECT không tham số
+	 * 
 	 * @param query
 	 * @return ResultSet chứa dữ liệu
 	 * @throws SQLException
@@ -42,6 +43,7 @@ public class DBConnection {
 
 	/**
 	 * Thực hiện SELECT có tham số
+	 * 
 	 * @param query
 	 * @param params
 	 * @return ResultSet chứa dữ liệu
@@ -57,6 +59,7 @@ public class DBConnection {
 
 	/**
 	 * Thực hiện INSERT, UPDATE, DELETE không tham số
+	 * 
 	 * @param query
 	 * @return Số lượng dòng bị ảnh hưởng bởi câu truy vấn
 	 * @throws SQLException
@@ -68,6 +71,7 @@ public class DBConnection {
 
 	/**
 	 * Thực hiện INSERT, UPDATE, DELETE có tham số
+	 * 
 	 * @param query
 	 * @param params
 	 * @return Số lượng dòng bị ảnh hưởng bởi câu truy vấn
@@ -79,7 +83,7 @@ public class DBConnection {
 		return ps.executeUpdate();
 
 	}
-	
+
 	public ResultSet executeProcedureQuery(String query) throws SQLException {
 		CallableStatement cl = conn.prepareCall(query);
 		return cl.executeQuery();
@@ -95,15 +99,16 @@ public class DBConnection {
 		CallableStatement cl = conn.prepareCall(query);
 		return cl.executeUpdate();
 	}
-	
+
 	public int executeProcedureUpdate(String query, Object[] params) throws SQLException {
 		CallableStatement cl = conn.prepareCall(query);
 		appendParamaters(cl, params);
 		return cl.executeUpdate();
 	}
-	
+
 	/**
 	 * Gán những tham số vào câu truy vấn
+	 * 
 	 * @param ps
 	 * @param params
 	 * @throws SQLException

@@ -39,7 +39,7 @@ public class TaiKhoan {
 	public void setMaNV(String maNV) {
 		this.maNV = maNV;
 	}
-	
+
 	@Override
 	public String toString() {
 		return this.username;

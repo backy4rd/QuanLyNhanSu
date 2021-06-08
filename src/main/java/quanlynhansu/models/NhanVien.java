@@ -148,7 +148,7 @@ public class NhanVien {
 
 		return list;
 	}
-	
+
 	public static void diemDanh(String maNV, Date ngay) throws SQLException {
 		Object[] params = new Object[] { maNV, ngay };
 		DBConnection.getInstance().executeProcedureUpdate("{ CALL diem_danh(?, ?) }", params);

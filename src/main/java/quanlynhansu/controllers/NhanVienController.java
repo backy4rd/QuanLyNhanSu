@@ -17,6 +17,7 @@ public class NhanVienController {
 			throw new ControllerException("Lỗi truy vấn");
 		}
 	}
+
 	public ArrayList<NhanVien> getNhanViens() throws ControllerException {
 		try {
 			return NhanVien.getNhanViens();
@@ -25,7 +26,7 @@ public class NhanVienController {
 			throw new ControllerException("Lỗi truy vấn");
 		}
 	}
-	
+
 	public void DiemDanh(String maNV) throws ControllerException {
 		try {
 			Date now = new Date(System.currentTimeMillis());
@@ -33,7 +34,7 @@ public class NhanVienController {
 			if (DiemDanh.getDiemDanh(maNV, now) != null) {
 				throw new ControllerException("Đã điểm danh");
 			}
-			
+
 			NhanVien.diemDanh(maNV, now);
 		} catch (SQLException e) {
 			e.printStackTrace();

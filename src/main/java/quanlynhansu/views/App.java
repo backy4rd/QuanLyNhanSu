@@ -111,7 +111,8 @@ public class App extends JFrame {
 		menuItemDiemDanh.addActionListener(e -> {
 			try {
 				nvc.DiemDanh(AuthorizedUser.getInstance().getNhanVien().getMaNV());
-				JOptionPane.showMessageDialog(null, "Điểm danh thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Điểm danh thành công", "Thông báo",
+						JOptionPane.INFORMATION_MESSAGE);
 			} catch (ControllerException err) {
 				JOptionPane.showMessageDialog(null, err.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
 			}

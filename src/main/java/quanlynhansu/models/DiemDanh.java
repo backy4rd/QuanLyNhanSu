@@ -31,9 +31,9 @@ public class DiemDanh {
 	public void setNgay(Date ngay) {
 		this.ngay = ngay;
 	}
-	
+
 	public static DiemDanh getDiemDanh(String maNV, Date ngay) throws SQLException {
-		Object[] params = new Object[] {maNV, ngay};
+		Object[] params = new Object[] { maNV, ngay };
 		String query = "SELECT * FROM DiemDanh WHERE MaNV=? AND Ngay=?";
 
 		try (ResultSet rs = DBConnection.getInstance().executeQuery(query, params)) {

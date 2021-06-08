@@ -1,5 +1,7 @@
 package quanlynhansu.views.bangluong;
 
-public class BangLuong {
+import javax.swing.JFrame;
+
+public class BangLuong extends JFrame {
 
 }

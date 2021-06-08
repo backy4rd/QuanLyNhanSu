@@ -17,9 +17,10 @@ import javax.swing.JFrame;
 public class Util {
 	/**
 	 * Tạo ID ngẫu nhiên không trùng lặp
-	 * @param prefix tiền tố của id, vd: "NV01" thì tiền tố là "NV"
+	 * 
+	 * @param prefix    tiền tố của id, vd: "NV01" thì tiền tố là "NV"
 	 * @param tableName tên bảng cần tạo ID
-	 * @param field tên trường cần tạo ID
+	 * @param field     tên trường cần tạo ID
 	 * @return id
 	 */
 	public static String generateId(String prefix, String tableName, String field) {
@@ -47,6 +48,7 @@ public class Util {
 	/**
 	 * Căn JFrame ra giữa màn hình
 	 * Chú ý: JFrame cần được setSize trước khi gọi hàm này
+	 * 
 	 * @param form
 	 */
 	public static void centerScreen(JFrame form) {

@@ -30,8 +30,7 @@ public class NhanVienController {
 		try {
 			Date now = new Date(System.currentTimeMillis());
 
-			DiemDanh diemDanh = DiemDanh.getDiemDanh(maNV, now);
-			if (diemDanh != null) {
+			if (DiemDanh.getDiemDanh(maNV, now) != null) {
 				throw new ControllerException("Đã điểm danh");
 			}
 			

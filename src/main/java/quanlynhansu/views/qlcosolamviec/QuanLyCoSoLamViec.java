@@ -41,6 +41,7 @@ public class QuanLyCoSoLamViec extends JFrame {
 		this.setVisible(true);
 	}
 
+	// khởi tạo và gán dữ liệu cần thiết vào các nút, textbox, table,..
 	private void initializeComponents() {
 		try {
 			cslvTableModel = new CSLVTableModel(cslvc.getCoSoLamViecs());
@@ -66,6 +67,7 @@ public class QuanLyCoSoLamViec extends JFrame {
 		}
 	}
 
+	// dựng giao diện
 	private void createGUI() {
 		JPanel topPanel = new JPanel();
 		JPanel midPanel = new JPanel();
@@ -146,7 +148,9 @@ public class QuanLyCoSoLamViec extends JFrame {
 		Util.centerScreen(this);
 	}
 
+	// đăng ký các sự kiện cho table, nút
 	private void assignListeners() {
+		// event khi click vào ô trong table
 		tableCSLV.addMouseListener(new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

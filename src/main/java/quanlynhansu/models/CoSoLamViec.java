@@ -48,7 +48,7 @@ public class CoSoLamViec {
 
 	public static CoSoLamViec getCoSoLamViec(String maCS) throws SQLException {
 		Object[] params = { maCS };
-		String query = "SELECT * FROM ChucVu WHERE MaCV=?";
+		String query = "SELECT * FROM CoSoLamViec WHERE MaCS=?";
 
 		try (ResultSet rs = DBConnection.getInstance().executeQuery(query, params)) {
 			if (rs.next()) {
@@ -70,5 +70,23 @@ public class CoSoLamViec {
 		}
 
 		return list;
+	}
+	
+	public static void createCoSoLamViec(CoSoLamViec cslv) throws SQLException {
+		String query = "INSERT INTO CoSoLamViec(MaCS, TenCS, DiaChi) VALUES(?,?,?)";
+		Object[] params = { cslv.getMaCS(), cslv.getTenCS(), cslv.getDiaChi() };
+		DBConnection.getInstance().executeUpdate(query, params);
+	}
+	
+	public static void updateCoSoLamViec(String maCS, CoSoLamViec cslv) throws SQLException {
+		String query = "UPDATE CoSoLamViec SET TenCS=?, DiaChi=? WHERE MaCS=?";
+		Object[] params = { cslv.getTenCS(), cslv.getDiaChi(), maCS };
+		DBConnection.getInstance().executeUpdate(query, params);
+	}
+	
+	public static void deleteCoSoLamViec(String maCS) throws SQLException {
+		String query = "DELETE FROM CoSoLamViec WHERE MaCS=?";
+		Object[] params = { maCS };
+		DBConnection.getInstance().executeUpdate(query, params);
 	}
 }

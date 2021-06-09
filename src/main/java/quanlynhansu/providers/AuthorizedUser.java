@@ -18,10 +18,6 @@ public class AuthorizedUser {
 		this.nhanVien = nhanVien;
 	}
 
-	public static void setInstance(AuthorizedUser instance) {
-		AuthorizedUser.instance = instance;
-	}
-
 	public static AuthorizedUser getInstance() {
 		if (instance == null) {
 			instance = new AuthorizedUser();

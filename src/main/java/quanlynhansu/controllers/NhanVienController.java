@@ -28,7 +28,7 @@ public class NhanVienController {
 		}
 	}
 
-	public void DiemDanh(String maNV) throws ControllerException {
+	public void diemDanh(String maNV) throws ControllerException {
 		try {
 			Date now = new Date(System.currentTimeMillis());
 

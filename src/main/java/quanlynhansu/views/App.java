@@ -110,7 +110,7 @@ public class App extends JFrame {
 		// menu tien ich
 		menuItemDiemDanh.addActionListener(e -> {
 			try {
-				nvc.DiemDanh(AuthorizedUser.getInstance().getNhanVien().getMaNV());
+				nvc.diemDanh(AuthorizedUser.getInstance().getNhanVien().getMaNV());
 				JOptionPane.showMessageDialog(null, "Điểm danh thành công", "Thông báo",
 						JOptionPane.INFORMATION_MESSAGE);
 			} catch (ControllerException err) {

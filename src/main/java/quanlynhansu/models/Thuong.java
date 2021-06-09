@@ -1,6 +1,11 @@
 package quanlynhansu.models;
 
 import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import quanlynhansu.providers.DBConnection;
 
 public class Thuong {
 	private String maThuong;
@@ -45,5 +50,21 @@ public class Thuong {
 
 	public void setMaNV(String maNV) {
 		this.maNV = maNV;
+	}
+
+	public static ArrayList<Thuong> getThuongTrongThang(String maNV, int thang, int nam) throws SQLException {
+
+		ArrayList<Thuong> list = new ArrayList<>();
+		Object[] params = new Object[] { maNV, thang, nam };
+		String query = "SELECT * FROM Thuong WHERE MaNV = ? AND MONTH(NgayThuong) = ? AND YEAR(NgayThuong) = ?";
+
+		try (ResultSet rs = DBConnection.getInstance().executeQuery(query, params)) {
+			while (rs.next()) {
+				list.add(new Thuong(rs.getString("MaThuong"), rs.getDouble("SoTien"), rs.getDate("NgayThuong"),
+						rs.getString("MaNV")));
+			}
+		}
+
+		return list;
 	}
 }

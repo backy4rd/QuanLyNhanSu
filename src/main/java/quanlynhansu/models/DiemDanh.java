@@ -3,6 +3,7 @@ package quanlynhansu.models;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import quanlynhansu.providers.DBConnection;
 
@@ -32,6 +33,12 @@ public class DiemDanh {
 		this.ngay = ngay;
 	}
 
+
+	public static void createDiemDanh(String maNV, Date ngay) throws SQLException {
+		Object[] params = new Object[] { maNV, ngay };
+		DBConnection.getInstance().executeProcedureUpdate("{ CALL diem_danh(?, ?) }", params);
+	}
+
 	public static DiemDanh getDiemDanh(String maNV, Date ngay) throws SQLException {
 		Object[] params = new Object[] { maNV, ngay };
 		String query = "SELECT * FROM DiemDanh WHERE MaNV=? AND Ngay=?";
@@ -42,5 +49,20 @@ public class DiemDanh {
 			}
 			return null;
 		}
+	}
+
+	public static ArrayList<DiemDanh> getDiemDanhTrongThang(String maNV, int thang, int nam) throws SQLException {
+		ArrayList<DiemDanh> list = new ArrayList<>();
+		Object[] params = new Object[] { maNV, thang, nam };
+		String query = "SELECT * FROM DiemDanh "
+				+ "WHERE MaNV = ? AND MONTH(Ngay) = ? AND YEAR(Ngay) = ?";
+
+		try (ResultSet rs = DBConnection.getInstance().executeQuery(query, params)) {
+			while (rs.next()) {
+				list.add(new DiemDanh(rs.getString("MaNV"), rs.getDate("Ngay")));
+			}
+		}
+
+		return list;
 	}
 }

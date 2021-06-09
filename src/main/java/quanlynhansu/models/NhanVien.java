@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class NhanVien {
+	public final int NGAY_LV_TRONG_THANG = 22;
+
 	private String maNV;
 	private String tenNV;
 	private boolean nu;
@@ -119,6 +121,10 @@ public class NhanVien {
 		return this.tenNV;
 	}
 
+	public double tinhLuong(int soNgayLV) {
+		return (this.luong / NGAY_LV_TRONG_THANG) * soNgayLV;
+	}
+
 	public static NhanVien getNhanVien(String maNV) throws SQLException {
 		Object[] params = { maNV };
 		String query = "SELECT * FROM NhanVien WHERE MaNV=?";
@@ -149,8 +155,22 @@ public class NhanVien {
 		return list;
 	}
 
-	public static void diemDanh(String maNV, Date ngay) throws SQLException {
-		Object[] params = new Object[] { maNV, ngay };
-		DBConnection.getInstance().executeProcedureUpdate("{ CALL diem_danh(?, ?) }", params);
+	public static ArrayList<NhanVien> getNhanViensCapBacNhoHon(int capBac) throws SQLException {
+		ArrayList<NhanVien> list = new ArrayList<>();
+
+		Object[] params = new Object[] { capBac };
+		String query = "SELECT * FROM NhanVien "
+				+ "JOIN ChucVu ON ChucVu.MaCV = NhanVien.MaCV "
+				+ "WHERE ChucVu.CapBac < ?";
+
+		try (ResultSet rs = DBConnection.getInstance().executeQuery(query, params)) {
+			while (rs.next()) {
+				list.add(new NhanVien(rs.getString("MaNV"), rs.getString("TenNV"), rs.getBoolean("Nu"),
+						rs.getString("SDT"), rs.getDate("NgaySinh"), rs.getString("DiaChi"), rs.getDouble("Luong"),
+						rs.getString("MaCS"), rs.getString("MaCV")));
+			}
+		}
+
+		return list;
 	}
 }

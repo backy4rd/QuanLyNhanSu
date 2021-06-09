@@ -1,6 +1,7 @@
 package quanlynhansu;
 
 import quanlynhansu.controllers.NhanVienController;
+import quanlynhansu.models.DiemDanh;
 import quanlynhansu.models.NhanVien;
 import quanlynhansu.providers.DBConnection;
 import quanlynhansu.views.App;
@@ -16,6 +17,8 @@ public class Main {
 		EventQueue.invokeLater(() -> {
 			new App();
 		});
+		
+
 //		
 //		ArrayList<NhanVien> list = new NhanVienController().getNhanViens();
 //		Random random = new Random();

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import quanlynhansu.models.DiemDanh;
 import quanlynhansu.models.NhanVien;
+import quanlynhansu.models.Thuong;
 import quanlynhansu.providers.ControllerException;
 
 public class NhanVienController {
@@ -35,10 +36,38 @@ public class NhanVienController {
 				throw new ControllerException("Đã điểm danh");
 			}
 
-			NhanVien.diemDanh(maNV, now);
+			DiemDanh.createDiemDanh(maNV, now);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new ControllerException("Lỗi truy vấn");
 		}
 	}
+
+	public ArrayList<DiemDanh> getDiemDanhtrongThang(String maNV, int thang, int nam) throws ControllerException {
+		try {
+			return DiemDanh.getDiemDanhTrongThang(maNV, thang, nam);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new ControllerException("Lỗi truy vấn");
+		}
+	}
+
+	public ArrayList<Thuong> getThuongTrongThang(String maNV, int thang, int nam) throws ControllerException {
+		try {
+			return Thuong.getThuongTrongThang(maNV, thang, nam);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new ControllerException("Lỗi truy vấn");
+		}
+	}
+
+	public ArrayList<NhanVien> getNhanViensCapBacNhoHon(int capBac) throws ControllerException {
+		try {
+			return NhanVien.getNhanViensCapBacNhoHon(capBac);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new ControllerException("Lỗi truy vấn");
+		}
+	}
+
 }

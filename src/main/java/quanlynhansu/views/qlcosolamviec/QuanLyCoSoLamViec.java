@@ -170,6 +170,7 @@ public class QuanLyCoSoLamViec extends JFrame {
 			}
 		});
 
+		// event khi nhấn nút thêm
 		btnThem.addActionListener(e -> {
 			isAdd = true;
 			txtTenCS.setText(null);
@@ -178,6 +179,7 @@ public class QuanLyCoSoLamViec extends JFrame {
 			txtTenCS.requestFocus();
 		});
 
+		// event khi nhấn nút sửa
 		btnSua.addActionListener(e -> {
 			if (tableCSLV.getSelectedRow() == -1) {
 				JOptionPane.showMessageDialog(null, "Chưa chọn cơ sở để cập nhật", "Lỗi", JOptionPane.ERROR_MESSAGE);
@@ -188,6 +190,7 @@ public class QuanLyCoSoLamViec extends JFrame {
 			txtTenCS.requestFocus();
 		});
 
+		// event khi nhấn nút xóa
 		btnXoa.addActionListener(e -> {
 			String maCS = cslvTableModel.getRow(tableCSLV.getSelectedRow()).getMaCS();
 
@@ -204,6 +207,7 @@ public class QuanLyCoSoLamViec extends JFrame {
 			}
 		});
 
+		// event khi nhấn nút lưu
 		btnLuu.addActionListener(e -> {
 			CoSoLamViec cslv = createCSLVModel();
 
@@ -224,16 +228,19 @@ public class QuanLyCoSoLamViec extends JFrame {
 			displaySelectedRow();
 		});
 
+		// event khi nhấn nút không lưu
 		btnKhongLuu.addActionListener(e -> {
 			setEditable(false);
 			displaySelectedRow();
 		});
 
+		// event khi nhấn nút đóng
 		btnDong.addActionListener(e -> {
 			this.dispose();
 		});
 	}
 
+	// điểu khiển các nút và text box
 	private void setEditable(boolean flag) {
 		btnThem.setEnabled(!flag);
 		btnSua.setEnabled(!flag);
@@ -248,6 +255,7 @@ public class QuanLyCoSoLamViec extends JFrame {
 		tableCSLV.setEnabled(!flag);
 	}
 
+	// hiển thị dòng đang được select lên các text box
 	private void displaySelectedRow() {
 		if (tableCSLV.getRowCount() == 0)
 			return;
@@ -258,6 +266,7 @@ public class QuanLyCoSoLamViec extends JFrame {
 		txtDiaChi.setText(cslvTableModel.getRow(tableCSLV.getSelectedRow()).getDiaChi());
 	}
 
+	// tạo CoSoLamViec từ các text box
 	private CoSoLamViec createCSLVModel() {
 		return new CoSoLamViec(null, txtTenCS.getText(), txtDiaChi.getText());
 	}

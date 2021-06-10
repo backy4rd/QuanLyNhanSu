@@ -154,11 +154,11 @@ public class QuanLyCoSoLamViec extends JFrame {
 		tableCSLV.addMouseListener(new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				displaySelectedRow();
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
+				displaySelectedRow();
 			}
 
 			@Override

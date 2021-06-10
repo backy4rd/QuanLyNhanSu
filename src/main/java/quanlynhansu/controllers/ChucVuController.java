@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import quanlynhansu.models.ChucVu;
 import quanlynhansu.providers.ControllerException;
+import quanlynhansu.providers.Util;
 
 public class ChucVuController {
 	public ChucVu getChucVu(String maCV) throws ControllerException {
@@ -19,6 +20,44 @@ public class ChucVuController {
 	public ArrayList<ChucVu> getChucVus() throws ControllerException {
 		try {
 			return ChucVu.getChucVus();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new ControllerException("Lỗi truy vấn");
+		}
+	}
+
+	public ChucVu createChucVu(ChucVu chucVu) throws ControllerException {
+		try {
+			chucVu.setMaCV(Util.generateId("CS", "CoSoLamViec", "MaCS"));
+			ChucVu.createChucVu(chucVu);
+			return chucVu;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new ControllerException("Lỗi truy vấn");
+		}
+	}
+
+	public ChucVu updateChucVu(String maCV, ChucVu chucVu) throws ControllerException {
+		try {
+			if (ChucVu.getChucVu(maCV) == null) {
+				throw new ControllerException("Chức vụ không tồn tại");
+			}
+
+			chucVu.setMaCV(maCV);
+			ChucVu.updateChucVu(maCV, chucVu);
+			return chucVu;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new ControllerException("Lỗi truy vấn");
+		}
+	}
+	public void deleteChucVu(String maCV) throws ControllerException {
+		try {
+			if (ChucVu.getChucVu(maCV) == null) {
+				throw new ControllerException("Chức vụ không tồn tại");
+			}
+
+			ChucVu.deleteChucVu(maCV);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new ControllerException("Lỗi truy vấn");

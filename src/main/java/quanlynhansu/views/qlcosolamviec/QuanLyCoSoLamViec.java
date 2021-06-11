@@ -109,6 +109,7 @@ public class QuanLyCoSoLamViec extends JFrame {
 
 		// table
 		tableCSLV.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+		tableCSLV.setRowHeight(24);
 		JScrollPane sTable = new JScrollPane(tableCSLV, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		gbc.gridy = 2;

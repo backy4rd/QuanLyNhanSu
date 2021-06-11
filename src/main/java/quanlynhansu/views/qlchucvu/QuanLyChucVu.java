@@ -107,6 +107,7 @@ public class QuanLyChucVu extends JFrame {
 
 		// table
 		tableChucVu.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+		tableChucVu.setRowHeight(24);
 		JScrollPane sTable = new JScrollPane(tableChucVu, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		gbc.gridy = 2;

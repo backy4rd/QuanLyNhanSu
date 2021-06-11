@@ -28,7 +28,7 @@ public class ChucVuController {
 
 	public ChucVu createChucVu(ChucVu chucVu) throws ControllerException {
 		try {
-			chucVu.setMaCV(Util.generateId("CS", "CoSoLamViec", "MaCS"));
+			chucVu.setMaCV(Util.generateId("CV", "ChucVu", "MaCV"));
 			ChucVu.createChucVu(chucVu);
 			return chucVu;
 		} catch (SQLException e) {

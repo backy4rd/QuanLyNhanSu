@@ -107,6 +107,7 @@ public class QuanLyChucVu extends JFrame {
 
 		// table
 		tableChucVu.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+		tableChucVu.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tableChucVu.setRowHeight(24);
 		JScrollPane sTable = new JScrollPane(tableChucVu, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -148,27 +149,8 @@ public class QuanLyChucVu extends JFrame {
 	}
 
 	private void assignListeners() {
-		tableChucVu.addMouseListener(new MouseListener() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-				displaySelectedRow();
-			}
-
-			@Override
-			public void mouseReleased(MouseEvent e) {
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-			}
+		tableChucVu.getSelectionModel().addListSelectionListener(e -> {
+			displaySelectedRow();
 		});
 
 		btnThem.addActionListener(e -> {

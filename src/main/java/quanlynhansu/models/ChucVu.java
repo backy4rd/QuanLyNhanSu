@@ -71,18 +71,32 @@ public class ChucVu {
 		return list;
 	}
 
+	public static ArrayList<ChucVu> getChucVusCapBacNhoHon(int capBac) throws SQLException {
+		ArrayList<ChucVu> list = new ArrayList<>();
+		String query = "SELECT * FROM ChucVu WHERE CapBac < ?";
+
+		try (ResultSet rs = DBConnection.getInstance().executeQuery(query, new Object[] { capBac })) {
+			while (rs.next()) {
+				list.add(new ChucVu(rs.getString("MaCV"), rs.getString("TenCV"), rs.getInt("CapBac")));
+			}
+		}
+
+		return list;
+
+	}
+
 	public static void createChucVu(ChucVu chucVu) throws SQLException {
 		String query = "INSERT INTO ChucVu(MaCV, TenCV, CapBac) VALUES(?,?,?)";
 		Object[] params = { chucVu.getMaCV(), chucVu.getTenCV(), chucVu.getCapBac() };
 		DBConnection.getInstance().executeUpdate(query, params);
 	}
-	
+
 	public static void updateChucVu(String maCV, ChucVu chucVu) throws SQLException {
 		String query = "UPDATE ChucVu SET TenCV=?, CapBac=? WHERE MaCV=?";
 		Object[] params = { chucVu.getTenCV(), chucVu.getCapBac(), maCV };
 		DBConnection.getInstance().executeUpdate(query, params);
 	}
-	
+
 	public static void deleteChucVu(String maCV) throws SQLException {
 		String query = "DELETE FROM ChucVu WHERE MaCV=?";
 		Object[] params = { maCV };

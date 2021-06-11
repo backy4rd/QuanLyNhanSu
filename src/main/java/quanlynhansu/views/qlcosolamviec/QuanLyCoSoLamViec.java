@@ -109,6 +109,7 @@ public class QuanLyCoSoLamViec extends JFrame {
 
 		// table
 		tableCSLV.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+		tableCSLV.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tableCSLV.setRowHeight(24);
 		JScrollPane sTable = new JScrollPane(tableCSLV, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -152,6 +153,10 @@ public class QuanLyCoSoLamViec extends JFrame {
 	// đăng ký các sự kiện cho table, nút
 	private void assignListeners() {
 		// event khi click vào ô trong table
+		tableCSLV.getSelectionModel().addListSelectionListener(e -> {
+			displaySelectedRow();
+		});
+
 		tableCSLV.addMouseListener(new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -159,7 +164,6 @@ public class QuanLyCoSoLamViec extends JFrame {
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				displaySelectedRow();
 			}
 
 			@Override

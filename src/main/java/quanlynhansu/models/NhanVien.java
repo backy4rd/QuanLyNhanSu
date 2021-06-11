@@ -23,6 +23,10 @@ public class NhanVien {
 	// relationship
 	private ChucVu chucVu;
 
+	public NhanVien() {
+
+	}
+
 	public NhanVien(String maNV, String tenNV, boolean nu, String sdt, Date ngaySinh, String diaChi, double luong,
 			String maCS, String maCV) {
 		this.maNV = maNV;
@@ -159,8 +163,7 @@ public class NhanVien {
 		ArrayList<NhanVien> list = new ArrayList<>();
 
 		Object[] params = new Object[] { capBac };
-		String query = "SELECT * FROM NhanVien "
-				+ "JOIN ChucVu ON ChucVu.MaCV = NhanVien.MaCV "
+		String query = "SELECT * FROM NhanVien " + "JOIN ChucVu ON ChucVu.MaCV = NhanVien.MaCV "
 				+ "WHERE ChucVu.CapBac < ?";
 
 		try (ResultSet rs = DBConnection.getInstance().executeQuery(query, params)) {
@@ -172,5 +175,29 @@ public class NhanVien {
 		}
 
 		return list;
+	}
+
+	public static void createNhanVien(NhanVien nv) throws SQLException {
+		Object[] params = { nv.getMaNV(), nv.getTenNV(), nv.isNu(), nv.getSdt(), nv.getNgaySinh(), nv.getDiaChi(),
+				nv.getLuong(), nv.getMaCS(), nv.getMaCV() };
+		String query = "INSERT INTO NhanVien (MaNV, TenNV, Nu, SDT, NgaySinh, DiaChi, Luong, MaCS, MaCV) "
+				+ "VALUES (?,?,?,?,?,?,?,?,?)";
+
+		DBConnection.getInstance().executeUpdate(query, params);
+	}
+
+	public static void updateNhanVien(String maNV, NhanVien nv) throws SQLException {
+		Object[] params = { nv.getTenNV(), nv.isNu(), nv.getSdt(), nv.getNgaySinh(), nv.getDiaChi(), nv.getLuong(),
+				nv.getMaCS(), nv.getMaCV(), maNV };
+		String query = "UPDATE NhanVien SET TenNV=?, Nu=?, SDT=?, NgaySinh=?, DiaChi=?, Luong=?, MaCS=?, MaCV=? "
+				+ "WHERE MaNV=?";
+
+		DBConnection.getInstance().executeUpdate(query, params);
+	}
+	
+	public static void deleteNhanVien(String maNV) throws SQLException {
+		Object[] params = { maNV };
+		String query = "DELETE FROM NhanVien WHERE MaNV=?";
+		DBConnection.getInstance().executeUpdate(query, params);
 	}
 }

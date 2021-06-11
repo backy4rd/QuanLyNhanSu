@@ -8,6 +8,7 @@ import quanlynhansu.models.DiemDanh;
 import quanlynhansu.models.NhanVien;
 import quanlynhansu.models.Thuong;
 import quanlynhansu.providers.ControllerException;
+import quanlynhansu.providers.Util;
 
 public class NhanVienController {
 	public NhanVien getNhanVien(String maNV) throws ControllerException {
@@ -70,4 +71,40 @@ public class NhanVienController {
 		}
 	}
 
+	public NhanVien createNhanVien(NhanVien nv) throws ControllerException{
+		try {
+			nv.setMaNV(Util.generateId("NV", "NhanVien", "MaNV"));
+			NhanVien.createNhanVien(nv);
+			return nv;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new ControllerException("Lỗi truy vấn");
+		}
+	}
+
+	public NhanVien updateNhanVien(String maNV, NhanVien nv) throws ControllerException{
+		try {
+			if (NhanVien.getNhanVien(maNV) == null) {
+				throw new ControllerException("Nhân viên không tồn tại");
+			}
+			NhanVien.updateNhanVien(maNV, nv);
+			nv.setMaNV(maNV);
+			return nv;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new ControllerException("Lỗi truy vấn");
+		}
+	}
+
+	public void deleteNhanVien(String maNV) throws ControllerException{
+		try {
+			if (NhanVien.getNhanVien(maNV) == null) {
+				throw new ControllerException("Nhân viên không tồn tại");
+			}
+			NhanVien.deleteNhanVien(maNV);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new ControllerException("Lỗi truy vấn");
+		}
+	}
 }

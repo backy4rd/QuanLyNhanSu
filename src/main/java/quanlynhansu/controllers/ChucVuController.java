@@ -25,6 +25,15 @@ public class ChucVuController {
 			throw new ControllerException("Lỗi truy vấn");
 		}
 	}
+	
+	public ArrayList<ChucVu> getChucVusCapBacNhoHon(int capBac) throws ControllerException {
+		try {
+			return ChucVu.getChucVusCapBacNhoHon(capBac);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new ControllerException("Lỗi truy vấn");
+		}
+	}
 
 	public ChucVu createChucVu(ChucVu chucVu) throws ControllerException {
 		try {

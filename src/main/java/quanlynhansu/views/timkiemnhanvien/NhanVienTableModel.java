@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 import javax.swing.table.AbstractTableModel;
 
-import quanlynhansu.models.ChucVu;
 import quanlynhansu.models.CoSoLamViec;
 import quanlynhansu.models.NhanVien;
 
@@ -15,7 +14,6 @@ public class NhanVienTableModel extends AbstractTableModel {
 	private final String[] headers = new String[] { "Mã nhân viên", "Tên nhân viên", "Giới tính", "SĐT", "Ngày sinh", "Địa chỉ", "Lương" };
 	private ArrayList<NhanVien> source;
 	private ArrayList<NhanVien> filtered;
-	private String lastSearchKeyword;
 
 	public NhanVienTableModel(ArrayList<NhanVien> source) {
 		this.source = source;

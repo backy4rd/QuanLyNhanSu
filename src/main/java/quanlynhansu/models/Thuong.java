@@ -53,7 +53,6 @@ public class Thuong {
 	}
 
 	public static ArrayList<Thuong> getThuongTrongThang(String maNV, int thang, int nam) throws SQLException {
-
 		ArrayList<Thuong> list = new ArrayList<>();
 		Object[] params = new Object[] { maNV, thang, nam };
 		String query = "SELECT * FROM Thuong WHERE MaNV = ? AND MONTH(NgayThuong) = ? AND YEAR(NgayThuong) = ?";
@@ -66,5 +65,12 @@ public class Thuong {
 		}
 
 		return list;
+	}
+	
+	public static void createThuong(Thuong thuong) throws SQLException {
+		Object[] params = {thuong.getMaThuong(), thuong.getSoTien(), thuong.getNgayThuong(), thuong.getMaNV()};
+		String query = "INSERT INTO Thuong (MaThuong, SoTien, NgayThuong, MaNV) VALUES (?,?,?,?)";
+				
+		DBConnection.getInstance().executeUpdate(query, params);
 	}
 }

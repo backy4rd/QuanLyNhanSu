@@ -107,4 +107,20 @@ public class NhanVienController {
 			throw new ControllerException("Lỗi truy vấn");
 		}
 	}
+
+	public Thuong khenThuong(String maNV, double tienThuong) throws ControllerException{
+		try {
+			if (NhanVien.getNhanVien(maNV) == null) {
+				throw new ControllerException("Nhân viên không tồn tại");
+			}
+			String id = Util.generateId("T", "Thuong", "MaThuong");
+			Date ngayThuong = new Date(System.currentTimeMillis());
+			Thuong thuong = new Thuong(id, tienThuong, ngayThuong, maNV);
+			Thuong.createThuong(thuong);
+			return thuong;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new ControllerException("Lỗi truy vấn");
+		}
+	}
 }

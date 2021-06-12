@@ -48,6 +48,7 @@ public class QuanLyNhanVien extends JFrame implements ActionListener {
 		setVisible(true);
 		setSize(800, 550);
 		Util.centerScreen(this);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.gridx = 0;

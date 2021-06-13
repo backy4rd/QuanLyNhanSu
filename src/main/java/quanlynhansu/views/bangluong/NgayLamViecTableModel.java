@@ -24,6 +24,7 @@ public class NgayLamViecTableModel extends AbstractTableModel {
 
 		list = new ArrayList<>();
 
+		// Lấp đầy những ngày còn trống trong tháng để hiển thị bảng ngày làm việc trong tháng
 		for (int i = 1; i <= tongNgayTrongThang; i++) {
 			calendar.set(nam, thang - 1, i, 0, 0, 0);
 			Date date = new Date(calendar.getTimeInMillis());

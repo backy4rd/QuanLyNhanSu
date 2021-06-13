@@ -1,22 +1,33 @@
 package quanlynhansu.views.qlchucvu;
 
-import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.BorderLayout;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 
-import javax.swing.*;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
 
 import quanlynhansu.controllers.ChucVuController;
 import quanlynhansu.models.ChucVu;
 import quanlynhansu.providers.ControllerException;
 import quanlynhansu.providers.Util;
 
-@SuppressWarnings("serial")
 public class QuanLyChucVu extends JFrame {
 	private ChucVuController cvc = new ChucVuController();
 
-	private ChucVuTableModel chucVuTableModel;
-	private JTable tableChucVu;
+	private CVTableModel cvTableModel;
+	private JTable tableCV;
 	private JTextField txtTenCV;
 	private JTextField txtCapBac;
 	private JButton btnThem;
@@ -29,7 +40,7 @@ public class QuanLyChucVu extends JFrame {
 	private boolean isAdd;
 
 	public QuanLyChucVu() {
-		super("Quản lý chức vụ");
+		super("Quản Lý Chức Vụ");
 
 		initializeComponents();
 		createGUI();
@@ -41,10 +52,11 @@ public class QuanLyChucVu extends JFrame {
 		this.setVisible(true);
 	}
 
+
 	private void initializeComponents() {
 		try {
-			chucVuTableModel = new ChucVuTableModel(cvc.getChucVus());
-			tableChucVu = new JTable(chucVuTableModel);
+			cvTableModel = new CVTableModel(cvc.getChucVus());
+			tableCV = new JTable(cvTableModel);
 
 			btnThem = new JButton("Thêm");
 			btnThem.setIcon(new ImageIcon(this.getClass().getResource("../../images/add.png")));
@@ -62,9 +74,10 @@ public class QuanLyChucVu extends JFrame {
 			txtTenCV = new JTextField();
 			txtCapBac = new JTextField();
 		} catch (ControllerException err) {
-			JOptionPane.showMessageDialog(null, err.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, err.getMessage(), "Lá»—i", JOptionPane.ERROR_MESSAGE);
 		}
 	}
+
 
 	private void createGUI() {
 		JPanel topPanel = new JPanel();
@@ -77,26 +90,22 @@ public class QuanLyChucVu extends JFrame {
 
 		GridBagConstraints gbc = new GridBagConstraints();
 
-		// top panel
-		JLabel title = new JLabel("Quản lý chức vụ", SwingConstants.CENTER);
+		JLabel title = new JLabel("Quản Lý Chức Vụ", SwingConstants.CENTER);
 		title.setFont(new Font("Arial", Font.BOLD, 18));
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.insets = new Insets(12, 0, 12, 0);
 		topPanel.add(title, gbc);
 
-		// mid panel
-		// col 1
 		gbc.insets = new Insets(4, 4, 4, 4);
-		JLabel labelTenCS = new JLabel("Tên chức vụ: ");
+		JLabel labelTenCV = new JLabel("Tên chức vụ: ");
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		midPanel.add(labelTenCS, gbc);
-		JLabel labelDiaChi = new JLabel("Cấp bậc: ");
+		midPanel.add(labelTenCV, gbc);
+		JLabel labelCapBac = new JLabel("Cấp bậc: ");
 		gbc.gridy++;
-		midPanel.add(labelDiaChi, gbc);
+		midPanel.add(labelCapBac, gbc);
 
-		// col 2
 		gbc.gridx = 1;
 		gbc.gridy = 0;
 		gbc.weightx = 1;
@@ -106,10 +115,10 @@ public class QuanLyChucVu extends JFrame {
 		midPanel.add(txtCapBac, gbc);
 
 		// table
-		tableChucVu.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-		tableChucVu.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		tableChucVu.setRowHeight(24);
-		JScrollPane sTable = new JScrollPane(tableChucVu, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+		tableCV.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+		tableCV.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tableCV.setRowHeight(24);
+		JScrollPane sTable = new JScrollPane(tableCV, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		gbc.gridy = 2;
 		gbc.gridx = 0;
@@ -148,8 +157,9 @@ public class QuanLyChucVu extends JFrame {
 		Util.centerScreen(this);
 	}
 
+
 	private void assignListeners() {
-		tableChucVu.getSelectionModel().addListSelectionListener(e -> {
+		tableCV.getSelectionModel().addListSelectionListener(e -> {
 			displaySelectedRow();
 		});
 
@@ -162,8 +172,8 @@ public class QuanLyChucVu extends JFrame {
 		});
 
 		btnSua.addActionListener(e -> {
-			if (tableChucVu.getSelectedRow() == -1) {
-				JOptionPane.showMessageDialog(null, "Chưa chọn cơ sở để cập nhật", "Lỗi", JOptionPane.ERROR_MESSAGE);
+			if (tableCV.getSelectedRow() == -1) {
+				JOptionPane.showMessageDialog(null, "Chưa chọn chức vụ", "Lỗi", JOptionPane.ERROR_MESSAGE);
 				return;
 			}
 			isAdd = false;
@@ -172,39 +182,37 @@ public class QuanLyChucVu extends JFrame {
 		});
 
 		btnXoa.addActionListener(e -> {
-			String maCV = chucVuTableModel.getRow(tableChucVu.getSelectedRow()).getMaCV();
+			String maCV = cvTableModel.getRow(tableCV.getSelectedRow()).getMaCV();
 
-			int dialogResult = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn xóa chức vụ này không?",
+			int dialogResult = JOptionPane.showConfirmDialog(null, "Bạn có muốn xóa chức vụ này không?",
 					"Cảnh báo", JOptionPane.YES_NO_OPTION);
 			if (dialogResult == JOptionPane.NO_OPTION)
 				return;
 
 			try {
 				cvc.deleteChucVu(maCV);
-				chucVuTableModel.removeRow(tableChucVu.getSelectedRow());
+				cvTableModel.removeRow(tableCV.getSelectedRow());
 			} catch (ControllerException err) {
 				JOptionPane.showMessageDialog(null, err.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
 			}
 		});
 
 		btnLuu.addActionListener(e -> {
-			ChucVu chucVu = null;
-
+			ChucVu cv = null;
 			try {
-				chucVu = createChucVuModel();
-			} catch (NumberFormatException err) {
+				cv = createCVModel();
+			} catch (NumberFormatException ex) {
 				JOptionPane.showMessageDialog(null, "Cấp bậc không hợp lệ", "Lỗi", JOptionPane.ERROR_MESSAGE);
-				return;
 			}
 
 			try {
 				if (isAdd) {
-					chucVu = cvc.createChucVu(chucVu);
-					chucVuTableModel.addRow(chucVu);
+					cv = cvc.createChucVu(cv);
+					cvTableModel.addRow(cv);
 				} else {
-					String maCV = chucVuTableModel.getRow(tableChucVu.getSelectedRow()).getMaCV();
-					chucVu = cvc.updateChucVu(maCV, chucVu);
-					chucVuTableModel.updateRow(tableChucVu.getSelectedRow(), chucVu);
+					String maCV = cvTableModel.getRow(tableCV.getSelectedRow()).getMaCV();
+					cv = cvc.updateChucVu(maCV, cv);
+					cvTableModel.updateRow(tableCV.getSelectedRow(), cv);
 				}
 			} catch (ControllerException err) {
 				JOptionPane.showMessageDialog(null, err.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
@@ -235,21 +243,21 @@ public class QuanLyChucVu extends JFrame {
 		txtTenCV.setEditable(flag);
 		txtCapBac.setEditable(flag);
 
-		tableChucVu.setEnabled(!flag);
+		tableCV.setEnabled(!flag);
 	}
 
 	private void displaySelectedRow() {
-		if (tableChucVu.getRowCount() == 0)
+		if (tableCV.getRowCount() == 0)
 			return;
-		if (tableChucVu.getSelectedRow() == -1)
+		if (tableCV.getSelectedRow() == -1)
 			return;
 
-		txtTenCV.setText(chucVuTableModel.getRow(tableChucVu.getSelectedRow()).getTenCV());
-		txtCapBac.setText(String.valueOf(chucVuTableModel.getRow(tableChucVu.getSelectedRow()).getCapBac()));
+		txtTenCV.setText(cvTableModel.getRow(tableCV.getSelectedRow()).getTenCV());
+		txtCapBac.setText(cvTableModel.getRow(tableCV.getSelectedRow()).getCapBac() + "");
 	}
 
-	private ChucVu createChucVuModel() throws NumberFormatException {
-		return new ChucVu(null, txtTenCV.getText(), Integer.valueOf(txtCapBac.getText()));
+	private ChucVu createCVModel()  throws NumberFormatException {
+		return new ChucVu(null, txtTenCV.getText(), Integer.parseInt(txtCapBac.getText()));
 	}
 
 }

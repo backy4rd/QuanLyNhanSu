@@ -11,6 +11,12 @@ import quanlynhansu.providers.ControllerException;
 import quanlynhansu.providers.Util;
 
 public class NhanVienController {
+	/**
+	 * Lấy nhân viên qua mã nhân viên
+	 * @param maNV
+	 * @return
+	 * @throws ControllerException
+	 */
 	public NhanVien getNhanVien(String maNV) throws ControllerException {
 		try {
 			return NhanVien.getNhanVien(maNV);
@@ -20,6 +26,11 @@ public class NhanVienController {
 		}
 	}
 
+	/**
+	 * Lấy danh sách nhân viên
+	 * @return
+	 * @throws ControllerException
+	 */
 	public ArrayList<NhanVien> getNhanViens() throws ControllerException {
 		try {
 			return NhanVien.getNhanViens();
@@ -29,6 +40,11 @@ public class NhanVienController {
 		}
 	}
 
+	/**
+	 * Điểm danh cho ngày hôm nay
+	 * @param maNV
+	 * @throws ControllerException
+	 */
 	public void diemDanh(String maNV) throws ControllerException {
 		try {
 			Date now = new Date(System.currentTimeMillis());
@@ -44,6 +60,14 @@ public class NhanVienController {
 		}
 	}
 
+	/**
+	 * Lấy danh sách Điểm Danh trong tháng chỉ định
+	 * @param maNV
+	 * @param thang
+	 * @param nam
+	 * @return
+	 * @throws ControllerException
+	 */
 	public ArrayList<DiemDanh> getDiemDanhtrongThang(String maNV, int thang, int nam) throws ControllerException {
 		try {
 			return DiemDanh.getDiemDanhTrongThang(maNV, thang, nam);
@@ -53,6 +77,14 @@ public class NhanVienController {
 		}
 	}
 
+	/**
+	 * Lấy danh sách Thưởng trong tháng chỉ định
+	 * @param maNV
+	 * @param thang
+	 * @param nam
+	 * @return
+	 * @throws ControllerException
+	 */
 	public ArrayList<Thuong> getThuongTrongThang(String maNV, int thang, int nam) throws ControllerException {
 		try {
 			return Thuong.getThuongTrongThang(maNV, thang, nam);
@@ -62,6 +94,12 @@ public class NhanVienController {
 		}
 	}
 
+	/**
+	 * Lấy danh sách nhân viên có cấp bậc nhỏ hơn tham số truyền vào
+	 * @param capBac
+	 * @return
+	 * @throws ControllerException
+	 */
 	public ArrayList<NhanVien> getNhanViensCapBacNhoHon(int capBac) throws ControllerException {
 		try {
 			return NhanVien.getNhanViensCapBacNhoHon(capBac);
@@ -71,6 +109,12 @@ public class NhanVienController {
 		}
 	}
 
+	/**
+	 * Tạo mới nhân viên
+	 * @param nv
+	 * @return
+	 * @throws ControllerException
+	 */
 	public NhanVien createNhanVien(NhanVien nv) throws ControllerException{
 		try {
 			nv.setMaNV(Util.generateId("NV", "NhanVien", "MaNV"));
@@ -82,6 +126,13 @@ public class NhanVienController {
 		}
 	}
 
+	/**
+	 * Cập nhật nhân viên
+	 * @param maNV
+	 * @param nv
+	 * @return
+	 * @throws ControllerException
+	 */
 	public NhanVien updateNhanVien(String maNV, NhanVien nv) throws ControllerException{
 		try {
 			if (NhanVien.getNhanVien(maNV) == null) {
@@ -96,6 +147,11 @@ public class NhanVienController {
 		}
 	}
 
+	/**
+	 * Xóa nhân viên
+	 * @param maNV
+	 * @throws ControllerException
+	 */
 	public void deleteNhanVien(String maNV) throws ControllerException{
 		try {
 			if (NhanVien.getNhanVien(maNV) == null) {
@@ -108,6 +164,13 @@ public class NhanVienController {
 		}
 	}
 
+	/**
+	 * Khen thưởng cho nhân viên
+	 * @param maNV
+	 * @param tienThuong
+	 * @return
+	 * @throws ControllerException
+	 */
 	public Thuong khenThuong(String maNV, double tienThuong) throws ControllerException{
 		try {
 			if (NhanVien.getNhanVien(maNV) == null) {

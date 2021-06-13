@@ -11,7 +11,6 @@ import quanlynhansu.models.CoSoLamViec;
 import quanlynhansu.providers.ControllerException;
 import quanlynhansu.providers.Util;
 
-@SuppressWarnings("serial")
 public class QuanLyCoSoLamViec extends JFrame {
 	private CoSoLamViecController cslvc = new CoSoLamViecController();
 

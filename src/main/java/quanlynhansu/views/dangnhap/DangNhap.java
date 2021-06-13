@@ -11,7 +11,6 @@ import quanlynhansu.providers.ControllerException;
 import quanlynhansu.providers.Util;
 import quanlynhansu.views.App;
 
-@SuppressWarnings("serial")
 public class DangNhap extends JFrame {
 	TaiKhoanController taiKhoanController = new TaiKhoanController();
 	private App app;

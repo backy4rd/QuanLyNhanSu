@@ -13,7 +13,6 @@ import quanlynhansu.models.CoSoLamViec;
 import quanlynhansu.providers.ControllerException;
 import quanlynhansu.providers.Util;
 
-@SuppressWarnings("serial")
 public class TimKiemNhanVien extends JFrame {
 	private NhanVienController nvc = new NhanVienController();
 	private CoSoLamViecController cslvc = new CoSoLamViecController();
@@ -46,7 +45,6 @@ public class TimKiemNhanVien extends JFrame {
 			JOptionPane.showMessageDialog(null, err.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
 		}
 
-		// top panel
 		JPanel topPanel = new JPanel();
 		topPanel.setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
@@ -95,7 +93,6 @@ public class TimKiemNhanVien extends JFrame {
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		panel.add(cmbCSLV, gbc);
 
-		// table
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		table.setRowHeight(24);
 		table.getColumnModel().getColumn(0).setPreferredWidth(40);
@@ -121,7 +118,6 @@ public class TimKiemNhanVien extends JFrame {
 		panel.setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
 
-		// bottom panel
 		gbc.gridy = 0;
 		gbc.gridx = 0;
 		gbc.gridwidth = 1;

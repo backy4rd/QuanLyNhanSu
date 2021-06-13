@@ -17,7 +17,6 @@ import quanlynhansu.providers.AuthorizedUser;
 import quanlynhansu.providers.ControllerException;
 import quanlynhansu.providers.Util;
 
-@SuppressWarnings("serial")
 public class BangLuong extends JFrame {
 	private NhanVienController nvc = new NhanVienController();
 	private NumberFormat formatter = NumberFormat.getCurrencyInstance();

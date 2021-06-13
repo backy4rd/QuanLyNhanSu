@@ -8,7 +8,6 @@ import javax.swing.table.AbstractTableModel;
 import quanlynhansu.models.CoSoLamViec;
 import quanlynhansu.models.NhanVien;
 
-@SuppressWarnings("serial")
 public class NhanVienTableModel extends AbstractTableModel {
 	private NumberFormat formatter = NumberFormat.getCurrencyInstance();
 	private final String[] headers = new String[] { "Mã nhân viên", "Tên nhân viên", "Giới tính", "SĐT", "Ngày sinh", "Địa chỉ", "Lương" };

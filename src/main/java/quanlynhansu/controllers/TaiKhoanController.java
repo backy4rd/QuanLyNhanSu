@@ -6,6 +6,13 @@ import quanlynhansu.models.*;
 import quanlynhansu.providers.ControllerException;
 
 public class TaiKhoanController {
+	/**
+	 * Thực hiện đăng nhập
+	 * @param username
+	 * @param password
+	 * @return Nhân viên sở hữu tài khoản truyền vào
+	 * @throws ControllerException
+	 */
 	public NhanVien dangNhap(String username, String password) throws ControllerException {
 		try {
 			TaiKhoan tk = TaiKhoan.getTaiKhoan(username);
@@ -27,6 +34,11 @@ public class TaiKhoanController {
 
 	}
 
+	/**
+	 * Cấp tài khoản cho nhân viên
+	 * @param tk
+	 * @throws ControllerException
+	 */
 	public void capTaiKhoan(TaiKhoan tk) throws ControllerException {
 		try {
 			if (TaiKhoan.getTaiKhoan(tk.getUsername()) != null) {

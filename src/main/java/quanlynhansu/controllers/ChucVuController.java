@@ -8,6 +8,12 @@ import quanlynhansu.providers.ControllerException;
 import quanlynhansu.providers.Util;
 
 public class ChucVuController {
+	/**
+	 * Lấy chức vụ bằng mã chức vụ
+	 * @param maCV
+	 * @return
+	 * @throws ControllerException
+	 */
 	public ChucVu getChucVu(String maCV) throws ControllerException {
 		try {
 			return ChucVu.getChucVu(maCV);
@@ -17,6 +23,11 @@ public class ChucVuController {
 		}
 	}
 
+	/**
+	 * Lấy danh sách tất cả các chức vụ
+	 * @return
+	 * @throws ControllerException
+	 */
 	public ArrayList<ChucVu> getChucVus() throws ControllerException {
 		try {
 			return ChucVu.getChucVus();
@@ -26,6 +37,12 @@ public class ChucVuController {
 		}
 	}
 	
+	/**
+	 * Lấy những chức vụ có cấp bậc nhỏ hơn tham số truyền vào
+	 * @param capBac
+	 * @return
+	 * @throws ControllerException
+	 */
 	public ArrayList<ChucVu> getChucVusCapBacNhoHon(int capBac) throws ControllerException {
 		try {
 			return ChucVu.getChucVusCapBacNhoHon(capBac);
@@ -35,6 +52,12 @@ public class ChucVuController {
 		}
 	}
 
+	/**
+	 * Tạo chức vụ mới
+	 * @param chucVu
+	 * @return
+	 * @throws ControllerException
+	 */
 	public ChucVu createChucVu(ChucVu chucVu) throws ControllerException {
 		try {
 			chucVu.setMaCV(Util.generateId("CV", "ChucVu", "MaCV"));
@@ -46,6 +69,13 @@ public class ChucVuController {
 		}
 	}
 
+	/**
+	 * Cập nhật lại chức vụ
+	 * @param maCV
+	 * @param chucVu
+	 * @return
+	 * @throws ControllerException
+	 */
 	public ChucVu updateChucVu(String maCV, ChucVu chucVu) throws ControllerException {
 		try {
 			if (ChucVu.getChucVu(maCV) == null) {
@@ -61,6 +91,11 @@ public class ChucVuController {
 		}
 	}
 
+	/**
+	 * Xóa chức vụ
+	 * @param maCV
+	 * @throws ControllerException
+	 */
 	public void deleteChucVu(String maCV) throws ControllerException {
 		try {
 			if (ChucVu.getChucVu(maCV) == null) {
@@ -74,6 +109,11 @@ public class ChucVuController {
 		}
 	}
 	
+	/**
+	 * Lấy cấp bậc lớn nhất của các chức vụ
+	 * @return
+	 * @throws ControllerException
+	 */
 	public int getCapBacLonNhat() throws ControllerException {
 		try {
 			ArrayList<ChucVu> chucVus = ChucVu.getChucVusLonNhat();

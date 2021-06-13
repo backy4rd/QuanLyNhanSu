@@ -6,12 +6,11 @@ import javax.swing.table.AbstractTableModel;
 
 import quanlynhansu.models.ChucVu;
 
-@SuppressWarnings("serial")
-public class ChucVuTableModel extends AbstractTableModel {
+public class CVTableModel extends AbstractTableModel {
 	private final String[] headers = new String[] { "Mã chức vụ", "Tên chức vụ", "Cấp bậc" };
 	private ArrayList<ChucVu> list;
 
-	public ChucVuTableModel(ArrayList<ChucVu> list) {
+	public CVTableModel(ArrayList<ChucVu> list) {
 		this.list = list;
 	}
 	
@@ -24,14 +23,14 @@ public class ChucVuTableModel extends AbstractTableModel {
 		fireTableDataChanged();
 	}
 	
-	public void addRow(ChucVu cslv) {
-		list.add(cslv);
+	public void addRow(ChucVu cv) {
+		list.add(cv);
 		fireTableDataChanged();
 	}
 	
-	public void updateRow(int index, ChucVu cslv) {
+	public void updateRow(int index, ChucVu cv) {
 		list.remove(index);
-		list.add(index, cslv);
+		list.add(index, cv);
 		fireTableDataChanged();
 	}
 
@@ -63,4 +62,5 @@ public class ChucVuTableModel extends AbstractTableModel {
 	public String getColumnName(int column) {
 		return headers[column];
 	}
+
 }

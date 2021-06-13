@@ -6,7 +6,6 @@ import javax.swing.table.AbstractTableModel;
 
 import quanlynhansu.models.CoSoLamViec;
 
-@SuppressWarnings("serial")
 public class CSLVTableModel extends AbstractTableModel {
 	private final String[] headers = new String[] { "Mã cơ sở", "Tên cơ sở", "Địa chỉ" };
 	private ArrayList<CoSoLamViec> list;

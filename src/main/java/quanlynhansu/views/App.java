@@ -87,7 +87,11 @@ public class App extends JFrame {
 		menubar.add(menuTienIch);
 
 		this.add(menubar, BorderLayout.NORTH);
-		this.setSize(800, 533);
+
+		this.add(new JLabel(new ImageIcon(this.getClass().getResource("../images/background.jpg"))), BorderLayout.CENTER);
+
+		this.setSize(1024, 576);
+		this.setResizable(false);
 		Util.centerScreen(this);
 	}
 

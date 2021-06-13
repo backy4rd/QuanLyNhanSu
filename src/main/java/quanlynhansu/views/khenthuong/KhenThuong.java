@@ -42,7 +42,7 @@ public class KhenThuong extends JFrame implements ActionListener {
 			thuongButton.setIcon(icon);
 
 			dongButton = new JButton("Đóng");
-			icon = new ImageIcon(this.getClass().getResource("../../images/salary.png"));
+			icon = new ImageIcon(this.getClass().getResource("../../images/close.png"));
 			dongButton.setIcon(icon);
 		} catch (ControllerException e) {
 		}

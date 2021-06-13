@@ -3,7 +3,9 @@ package quanlynhansu.views;
 import java.awt.*;
 import javax.swing.*;
 
+import quanlynhansu.controllers.ChucVuController;
 import quanlynhansu.controllers.NhanVienController;
+import quanlynhansu.models.NhanVien;
 import quanlynhansu.providers.AuthorizedUser;
 import quanlynhansu.providers.ControllerException;
 import quanlynhansu.providers.Util;
@@ -19,6 +21,7 @@ import quanlynhansu.views.timkiemnhanvien.TimKiemNhanVien;
 @SuppressWarnings("serial")
 public class App extends JFrame {
 	NhanVienController nvc = new NhanVienController();
+	ChucVuController cvc = new ChucVuController();
 
 	JMenuBar menubar = new JMenuBar();
 
@@ -39,10 +42,18 @@ public class App extends JFrame {
 	JMenuItem menuItemDangXuat = new JMenuItem("Đăng xuất");
 	JMenuItem menuItemThoat = new JMenuItem("Thoát");
 
+	private int capBacLonNhat;
+
 	public App() {
 		super("Quản lý nhân sự");
 
 		createGUI();
+
+		try {
+			capBacLonNhat = cvc.getCapBacLonNhat();
+		} catch (ControllerException e) {
+			JOptionPane.showMessageDialog(null, e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+		}
 
 		toggleFeatures();
 
@@ -138,9 +149,16 @@ public class App extends JFrame {
 	}
 
 	public void toggleFeatures() {
-		if (AuthorizedUser.getInstance().getNhanVien() == null) {
+		NhanVien authorizedNV = AuthorizedUser.getInstance().getNhanVien();
+
+		if (authorizedNV == null) {
 			menuQuanLy.setEnabled(false);
 			menuChucNang.setEnabled(false);
+
+			menuItemQLCSLV.setEnabled(false);
+			menuItemQLCV.setEnabled(false);
+			menuItemKhenThuongNV.setEnabled(false);
+			menuItemQLNV.setEnabled(false);
 
 			menuItemDiemDanh.setEnabled(false);
 			menuItemDangXuat.setEnabled(false);
@@ -150,6 +168,16 @@ public class App extends JFrame {
 		} else {
 			menuQuanLy.setEnabled(true);
 			menuChucNang.setEnabled(true);
+
+			if (authorizedNV.getChucVu().getCapBac() == capBacLonNhat) {
+				menuItemQLCSLV.setEnabled(true);
+				menuItemQLCV.setEnabled(true);
+			}
+
+			if (authorizedNV.getChucVu().getCapBac() != 1) {
+				menuItemKhenThuongNV.setEnabled(true);
+				menuItemQLNV.setEnabled(true);
+			}
 
 			menuItemDiemDanh.setEnabled(true);
 			menuItemDangXuat.setEnabled(true);

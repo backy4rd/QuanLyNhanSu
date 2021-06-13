@@ -58,6 +58,20 @@ public class ChucVu {
 		}
 	}
 
+	public static ArrayList<ChucVu> getChucVusLonNhat() throws SQLException {
+		ArrayList<ChucVu> list = new ArrayList<>();
+
+		String query = "SELECT * FROM ChucVu WHERE CapBac = (SELECT MAX(CapBac) FROM ChucVu)";
+
+		try (ResultSet rs = DBConnection.getInstance().executeQuery(query)) {
+			while (rs.next()) {
+				list.add(new ChucVu(rs.getString("MaCV"), rs.getString("TenCV"), rs.getInt("CapBac")));
+			}
+		}
+		
+		return list;
+	}
+
 	public static ArrayList<ChucVu> getChucVus() throws SQLException {
 		ArrayList<ChucVu> list = new ArrayList<>();
 		String query = "SELECT * FROM ChucVu";

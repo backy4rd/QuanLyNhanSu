@@ -60,6 +60,7 @@ public class ChucVuController {
 			throw new ControllerException("Lỗi truy vấn");
 		}
 	}
+
 	public void deleteChucVu(String maCV) throws ControllerException {
 		try {
 			if (ChucVu.getChucVu(maCV) == null) {
@@ -67,6 +68,16 @@ public class ChucVuController {
 			}
 
 			ChucVu.deleteChucVu(maCV);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new ControllerException("Lỗi truy vấn");
+		}
+	}
+	
+	public int getCapBacLonNhat() throws ControllerException {
+		try {
+			ArrayList<ChucVu> chucVus = ChucVu.getChucVusLonNhat();
+			return chucVus.get(0).getCapBac();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new ControllerException("Lỗi truy vấn");

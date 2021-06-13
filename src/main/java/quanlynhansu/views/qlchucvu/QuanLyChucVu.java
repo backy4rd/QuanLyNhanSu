@@ -251,4 +251,5 @@ public class QuanLyChucVu extends JFrame {
 	private ChucVu createChucVuModel() throws NumberFormatException {
 		return new ChucVu(null, txtTenCV.getText(), Integer.valueOf(txtCapBac.getText()));
 	}
+
 }
